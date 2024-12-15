@@ -2,6 +2,7 @@ package com.example.hm_1
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var gameOn: Boolean = false
     private lateinit var gameJob: Job
+    private lateinit var mediaPlayer: MediaPlayer
 
     private fun updateGameUi() {
         val currentTime = System.currentTimeMillis()
@@ -115,12 +117,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.soundtrack)
+        mediaPlayer.isLooping = true
+        mediaPlayer.start()
         var isVib = false
         if (!gameOn) {
             gameOn = true
             startTime = System.currentTimeMillis()
             gameJob = lifecycleScope.launch {
                 while (gameOn) {
+
                     gameManager.movePinsOneRowDown(gameManager.dataManager)
                     gameManager.randomAppearingPin(gameManager.dataManager)
                     isVib = gameManager.checkIncident(gameManager)

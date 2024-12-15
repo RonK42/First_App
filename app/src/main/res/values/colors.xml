@@ -3,5 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="back">#645A5A</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="buttons_color">#AFE9B0</color>
+    <color name="buttons_color">#FFEB3B</color>
+    <color name="car">#000000</color>
 </resources>
