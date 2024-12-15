@@ -215,7 +215,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="@dimen/Default_Life_Panel_Width"
         android:layout_height="@dimen/Default_Life_Panel_Height"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/Default_Element_Margin"
         android:layout_marginTop="@dimen/Default_Element_Margin">
