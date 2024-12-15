@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Default_Button_Size_Weight">50dp</dimen>
+    <dimen name="Default_Button_Size_Height">40dp</dimen>
+    <dimen name="Default_Element_Margin_From_Borders">50dp</dimen>
+</resources>
