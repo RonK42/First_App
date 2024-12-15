@@ -38,7 +38,7 @@ class Game_Manager {
 
         val bowlingPinsMatrix = dataManager.getBowlingPinsMatrix()
         val randomChance = (0..100).random()//Korean Random
-        if (randomChance < 50) {
+        if (randomChance < 60) {
             val randomIndex = (0..2).random()
             bowlingPinsMatrix[0][randomIndex] = true
         }

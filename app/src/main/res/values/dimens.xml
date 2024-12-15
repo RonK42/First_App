@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="Default_Button_Size_Weight">50dp</dimen>
-    <dimen name="Default_Button_Size_Height">40dp</dimen>
-    <dimen name="Default_Element_Margin_From_Borders">50dp</dimen>
+    <dimen name="Pin_Weight">0dp</dimen>
+    <dimen name="Pin_Height">100dp</dimen>
+    <dimen name="Life_Weight">0dp</dimen>
+    <dimen name="Life_Height">40dp</dimen>
+    <dimen name="Default_Element_Margin">30dp</dimen>
+    <dimen name="Default_Button_Width">150dp</dimen>
+    <dimen name="Default_Button_Height">75dp</dimen>
+    <dimen name="Default_Life_Panel_Width">140dp</dimen>
+    <dimen name="Default_Life_Panel_Height">40dp</dimen>
+
 </resources>

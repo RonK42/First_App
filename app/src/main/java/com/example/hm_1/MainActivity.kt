@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.hm_1.Utilities.Constants
+import com.example.hm_1.Utilities.SignalManager
 import com.example.hm_1.logic.Game_Manager
 import com.example.hm_1.model.Data_Manager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -124,7 +125,8 @@ class MainActivity : AppCompatActivity() {
                     gameManager.randomAppearingPin(gameManager.dataManager)
                     isVib = gameManager.checkIncident(gameManager)
                     if (isVib) {
-                        vibrate()
+
+                        SignalManager(this@MainActivity).vibrate(500)
                     }
                     if (!gameManager.lifeRow[0]) {
                         gameOn = false
@@ -134,13 +136,11 @@ class MainActivity : AppCompatActivity() {
                     delay(Constants.Game.DELAY)
                 }
                 changeActivity()
-                // Show a Toast message and vibrate long
-                Toast.makeText(this@MainActivity, "GAME OVER, NEXT TIME BE IN FOCUS!!!", Toast.LENGTH_SHORT).show()
-                vibrateLong()
+                SignalManager(this@MainActivity).vibrate(1500)
+                SignalManager(this@MainActivity).toast("GAME OVER!!!!!")
             }
         }
     }
-
 
 
     private fun findViews() {
@@ -189,26 +189,6 @@ class MainActivity : AppCompatActivity() {
     private fun changeActivity() {
         val intent = Intent(this, gameOverActivity::class.java)
         startActivity(intent)
-    }
-
-    fun vibrate() {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // Use Build.VERSION_CODES.O for better readability
-            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            // Fallback for older devices
-            vibrator.vibrate(200)
-        }
-    }
-
-    fun vibrateLong() {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // Use Build.VERSION_CODES.O for better readability
-            vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            // Fallback for older devices
-            vibrator.vibrate(1500)
-        }
     }
 
 
