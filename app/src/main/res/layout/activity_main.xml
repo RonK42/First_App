@@ -11,7 +11,7 @@
         android:id="@+id/Main_Button_Left"
         android:layout_width="@dimen/Default_Button_Width"
         android:layout_height="@dimen/Default_Button_Height"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/Default_Element_Margin"
         android:layout_marginBottom="@dimen/Default_Element_Margin"
@@ -24,7 +24,7 @@
         android:id="@+id/Main_Button_Right"
         android:layout_width="@dimen/Default_Button_Width"
         android:layout_height="@dimen/Default_Button_Height"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/Default_Element_Margin"
         android:layout_marginBottom="@dimen/Default_Element_Margin"
@@ -215,7 +215,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="@dimen/Default_Life_Panel_Width"
         android:layout_height="@dimen/Default_Life_Panel_Height"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/Default_Element_Margin"
         android:layout_marginTop="@dimen/Default_Element_Margin">
