@@ -15,5 +15,5 @@ https://imgur.com/HtODs9b
 
 ## Screenshots
 
-![App Screenshot](https://imgur.com/a/AOxnXSn)
+![App Screenshot](https://imgur.com/gallery/screen-AOxnXSn)
 
