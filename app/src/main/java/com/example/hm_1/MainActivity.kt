@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                     gameManager.randomAppearingPin(gameManager.dataManager)
                     isVib = gameManager.checkIncident(gameManager)
                     if (isVib) {
-
+                        SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
                         SignalManager(this@MainActivity).vibrate(500)
                     }
                     if (!gameManager.lifeRow[0]) {
