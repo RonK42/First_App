@@ -9,7 +9,3 @@ The Afeka Race is a game inspired by Beach Race on Nokia 3310 "The Block" legend
 - [@Ron Kraizover](https://github.com/RonK42)
 Known as the best programmer that evere lived.
 
-## Screenshots
-
-![App Screenshot](https://imgur.com/a/AOxnXSn)
-
