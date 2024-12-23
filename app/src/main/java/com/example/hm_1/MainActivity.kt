@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -51,9 +52,52 @@ class MainActivity : AppCompatActivity() {
         initViews()
         refreshLicensePanel()
         initListeners()
-        startGame()
+        onResume()
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (::gameJob.isInitialized && gameJob.isActive) {
+            gameJob.cancel() // Stop the game loop
+        }
+        gameOn = false
+
+        if (::mediaPlayer.isInitialized && mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!::mediaPlayer.isInitialized) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.soundtrack)
+            mediaPlayer.isLooping = true
+        }
+        mediaPlayer.start()
+        if (!gameOn) {
+            gameOn = true
+            startTime = System.currentTimeMillis()
+            gameJob = lifecycleScope.launch {
+                while (gameOn) {
+                    gameManager.movePinsOneRowDown(gameManager.dataManager)
+                    gameManager.randomAppearingPin(gameManager.dataManager)
+                    if (gameManager.checkIncident(gameManager)) {
+                        SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
+                        SignalManager(this@MainActivity).vibrate(500)
+                    }
+                    if (!gameManager.lifeRow[0]) {
+                        gameOn = false
+                        break
+                    }
+                    refreshUI()
+                    delay(Constants.Game.DELAY)
+                }
+                changeActivity()
+                SignalManager(this@MainActivity).vibrate(1500)
+                SignalManager(this@MainActivity).toast("GAME OVER!!!!!")
+            }
+        }
+    }
 
     private fun initViews() {
         refreshPinsLoc()
@@ -116,46 +160,12 @@ class MainActivity : AppCompatActivity() {
         refreshTruckLoc()
     }
 
-    private fun startGame() {
-        mediaPlayer = MediaPlayer.create(this, R.raw.soundtrack)
-        mediaPlayer.isLooping = true
-        mediaPlayer.start()
-        var isVib = false
-        if (!gameOn) {
-            gameOn = true
-            startTime = System.currentTimeMillis()
-            gameJob = lifecycleScope.launch {
-                while (gameOn) {
-
-                    gameManager.movePinsOneRowDown(gameManager.dataManager)
-                    gameManager.randomAppearingPin(gameManager.dataManager)
-                    isVib = gameManager.checkIncident(gameManager)
-                    if (isVib) {
-                        SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
-                        SignalManager(this@MainActivity).vibrate(500)
-                    }
-                    if (!gameManager.lifeRow[0]) {
-                        gameOn = false
-                        break
-                    }
-                    refreshUI()
-                    delay(Constants.Game.DELAY)
-                }
-                changeActivity()
-                SignalManager(this@MainActivity).vibrate(1500)
-                SignalManager(this@MainActivity).toast("GAME OVER!!!!!")
-            }
-        }
-    }
-
 
     private fun findViews() {
         Main_Button_Left = findViewById(R.id.Main_Button_Left)
         Main_Button_Right = findViewById(R.id.Main_Button_Right)
         Cars = arrayOf(
-            findViewById(R.id.Car_Left),
-            findViewById(R.id.Car_Center),
-            findViewById(R.id.Car_Right)
+            findViewById(R.id.Car_Left), findViewById(R.id.Car_Center), findViewById(R.id.Car_Right)
         )
         Pins = arrayOf(
             arrayOf(
