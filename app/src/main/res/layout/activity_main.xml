@@ -43,6 +43,19 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Car_Right"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/trunk" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/Car_Left"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
@@ -75,6 +88,19 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/trunk" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Car_Right"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/trunk" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -84,6 +110,7 @@
         android:layout_above="@id/car_panel"
         android:layout_marginStart="@dimen/Default_Element_Margin"
         android:layout_marginEnd="@dimen/Default_Element_Margin"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -92,6 +119,20 @@
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
             app:srcCompat="@drawable/bowling_pin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Pin_Bottom_Left"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bowling_pin" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/Pin_Weight"
@@ -119,17 +160,43 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/bowling_pin" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Pin_Bottom_Right"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bowling_pin" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/pin_panel_center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="114dp"
         android:layout_above="@id/pin_panel_bottom"
         android:layout_marginStart="@dimen/Default_Element_Margin"
         android:layout_marginEnd="@dimen/Default_Element_Margin"
-        android:layout_marginBottom="@dimen/Default_Element_Margin"
+        android:layout_marginBottom="9dp"
         android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Pin_Center_Left"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bowling_pin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/Pin_Center_Left"
@@ -164,21 +231,47 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/bowling_pin" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Pin_Center_Right"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bowling_pin" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/pin_panel_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="95dp"
         android:layout_above="@id/pin_panel_center"
         android:layout_marginStart="@dimen/Default_Element_Margin"
         android:layout_marginEnd="@dimen/Default_Element_Margin"
-        android:layout_marginBottom="@dimen/Default_Element_Margin"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Top_Left"
+            android:id="@+id/Pin_One"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bowling_pin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Pin_Two"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -205,6 +298,19 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/Pin_Top_Right"
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bowling_pin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/Pin_Weight"
+            android:layout_height="@dimen/Pin_Height"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/track_line" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/five"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -243,6 +349,19 @@
             app:srcCompat="@drawable/license" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_LBL_score"
+        android:layout_width="175dp"
+        android:layout_height="38dp"
+        android:layout_alignEnd="@id/Main_Button_Right"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>
