@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">HM_1</string>
+    <string name="score_0">Score: 0</string>
+    <string name="distance_0" />
+    <string name="distance">Distance: 0</string>
 </resources>

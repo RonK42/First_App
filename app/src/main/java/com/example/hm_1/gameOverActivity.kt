@@ -14,7 +14,7 @@ class gameOverActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_over)
-        findViews()
+       // findViews()
         initViews()
     }
 
@@ -23,6 +23,6 @@ class gameOverActivity : AppCompatActivity() {
     }
 
     private fun findViews() {
-        game_over = findViewById(R.id.game_over)
+       // game_over = findViewById(R.id.game_over)
     }
 }

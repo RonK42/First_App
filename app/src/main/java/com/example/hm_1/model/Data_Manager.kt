@@ -5,10 +5,10 @@ class Data_Manager {
     //Matrix to store the default state of the pins+trunk
 
     private val bowlingPinsMatrix: Array<Array<Boolean>> =
-        Array(4) { Array(3) { false } }
+        Array(4) { Array(5) { false } }
 
     private val trunkRow: Array<Boolean> =
-        Array(3) { false }
+        Array(5) { false }
 
     private val lifeRow: Array<Boolean> =
         Array(3) { true }

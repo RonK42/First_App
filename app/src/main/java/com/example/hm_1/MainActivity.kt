@@ -22,12 +22,14 @@ import com.example.hm_1.Utilities.SignalManager
 import com.example.hm_1.logic.Game_Manager
 import com.example.hm_1.model.Data_Manager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
+    lateinit var Distance_LBL : MaterialTextView
     lateinit var Main_Button_Left: ExtendedFloatingActionButton
     lateinit var Main_Button_Right: ExtendedFloatingActionButton
     lateinit var Cars: Array<AppCompatImageView>
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private var gameOn: Boolean = false
     private lateinit var gameJob: Job
     private lateinit var mediaPlayer: MediaPlayer
+    private var Distance = 0
 
     private fun updateGameUi() {
         val currentTime = System.currentTimeMillis()
@@ -75,10 +78,12 @@ class MainActivity : AppCompatActivity() {
         }
         mediaPlayer.start()
         if (!gameOn) {
+
             gameOn = true
             startTime = System.currentTimeMillis()
             gameJob = lifecycleScope.launch {
                 while (gameOn) {
+                    Distance += 10
                     gameManager.movePinsOneRowDown(gameManager.dataManager)
                     gameManager.randomAppearingPin(gameManager.dataManager)
                     if (gameManager.checkIncident(gameManager)) {
@@ -102,6 +107,13 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         refreshPinsLoc()
         refreshTruckLoc()
+        refrashDistance()
+
+    }
+
+    private fun refrashDistance() {
+        Distance_LBL.visibility = View.VISIBLE
+        Distance_LBL.text = "Distance: $Distance"
     }
 
     private fun refreshLicensePanel() {
@@ -162,41 +174,50 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun findViews() {
+        Distance_LBL = findViewById(R.id.main_LBL_distance)
         Main_Button_Left = findViewById(R.id.Main_Button_Left)
         Main_Button_Right = findViewById(R.id.Main_Button_Right)
         Cars = arrayOf(
-            findViewById(R.id.Car_Left), findViewById(R.id.Car_Center), findViewById(R.id.Car_Right)
+            findViewById(R.id.Player_One),
+            findViewById(R.id.Player_Two),
+            findViewById(R.id.Player_Three),
+            findViewById(R.id.Player_Four),
+            findViewById(R.id.Player_Five)
         )
         Pins = arrayOf(
             arrayOf(
-                findViewById(R.id.Pin_Top_Left),
-                findViewById(R.id.Pin_Top_Center),
-                findViewById(R.id.Pin_Top_Right)
-            ),
-            arrayOf(
-                findViewById(R.id.Pin_Center_Left),
-                findViewById(R.id.Pin_Center_Center),
-                findViewById(R.id.Pin_Center_Right)
+                findViewById(R.id.One_one),
+                findViewById(R.id.One_two),
+                findViewById(R.id.One_three),
+                findViewById(R.id.One_Four),
+                findViewById(R.id.One_Five)
 
             ),
             arrayOf(
-                findViewById(R.id.Pin_Bottom_Left),
-                findViewById(R.id.Pin_Bottom_Center),
-                findViewById(R.id.Pin_Bottom_Right)
+                findViewById(R.id.Two_One),
+                findViewById(R.id.Two_Two),
+                findViewById(R.id.Two_Three),
+                findViewById(R.id.Two_Four),
+                findViewById(R.id.Two_Five)
+
+            ),
+            arrayOf(
+                findViewById(R.id.Three_One),
+                findViewById(R.id.Three_Two),
+                findViewById(R.id.Three_Three),
+                findViewById(R.id.Three_Four),
+                findViewById(R.id.Three_Five)
             ),
         )
         license_Row = arrayOf(
             findViewById(R.id.main_IMG_license1),
             findViewById(R.id.main_IMG_license2),
             findViewById(R.id.main_IMG_license3),
-
-
-            )
-
-
+        )
     }
 
     private fun refreshUI() {
+        refrashDistance()
         refreshTruckLoc()
         refreshPinsLoc()
         refreshLicensePanel()

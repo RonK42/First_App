@@ -17,7 +17,7 @@ class Game_Manager {
         bowlingPinsMatrix[0][0] = true
 
         // Set the default state of the trunk
-        trunkRow[0] = true
+        trunkRow[2] = true
 
     }
 
@@ -39,7 +39,7 @@ class Game_Manager {
         val bowlingPinsMatrix = dataManager.getBowlingPinsMatrix()
         val randomChance = (0..100).random()//Korean Random
         if (randomChance < 60) {
-            val randomIndex = (0..2).random()
+            val randomIndex = (0..4).random()
             bowlingPinsMatrix[0][randomIndex] = true
         }
     }
@@ -52,7 +52,7 @@ class Game_Manager {
                 trunkRow[index - 1] = true
                 break
             }
-            if (value && direction == "left" && index < 2) {
+            if (value && direction == "left" && index < 4) {
                 trunkRow[index] = false
                 trunkRow[index + 1] = true
                 break

@@ -43,7 +43,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Car_Right"
+            android:id="@+id/Player_One"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -56,7 +56,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Car_Left"
+            android:id="@+id/Player_Two"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -69,7 +69,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Car_Center"
+            android:id="@+id/Player_Three"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -82,7 +82,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Car_Right"
+            android:id="@+id/Player_Four"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -95,7 +95,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Car_Right"
+            android:id="@+id/Player_Five"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -114,7 +114,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Bottom_Left"
+            android:id="@+id/Three_One"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -127,7 +127,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Bottom_Left"
+            android:id="@+id/Three_Two"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -141,7 +141,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Bottom_Center"
+            android:id="@+id/Three_Three"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -154,7 +154,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Bottom_Right"
+            android:id="@+id/Three_Four"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -167,7 +167,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Bottom_Right"
+            android:id="@+id/Three_Five"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -186,7 +186,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Center_Left"
+            android:id="@+id/Two_One"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -199,7 +199,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Center_Left"
+            android:id="@+id/Two_Two"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -212,7 +212,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Center_Center"
+            android:id="@+id/Two_Three"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -225,7 +225,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Center_Right"
+            android:id="@+id/Two_Four"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -238,7 +238,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Center_Right"
+            android:id="@+id/Two_Five"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -258,7 +258,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_One"
+            android:id="@+id/One_one"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -271,7 +271,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Two"
+            android:id="@+id/One_two"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -284,7 +284,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Top_Center"
+            android:id="@+id/One_three"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -297,7 +297,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Pin_Top_Right"
+            android:id="@+id/One_Four"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -310,7 +310,7 @@
             app:srcCompat="@drawable/track_line" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/five"
+            android:id="@+id/One_Five"
             android:layout_width="@dimen/Pin_Weight"
             android:layout_height="@dimen/Pin_Height"
             android:layout_weight="1"
@@ -324,7 +324,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/Default_Element_Margin"
-        android:layout_marginTop="@dimen/Default_Element_Margin">
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="27dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_license1"
@@ -356,10 +357,23 @@
         android:layout_height="38dp"
         android:layout_alignEnd="@id/Main_Button_Right"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="1dp"
         android:ems="10"
         android:gravity="center"
-        android:text="0"
+        android:text="@string/score_0"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_LBL_distance"
+        android:layout_width="175dp"
+        android:layout_height="38dp"
+        android:layout_alignEnd="@id/Main_Button_Right"
+        android:layout_marginEnd="-3dp"
+        android:ems="10"
+        android:gravity="center"
+        android:text="@string/distance"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
