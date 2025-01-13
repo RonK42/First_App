@@ -17,8 +17,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.hm_1.Interface.TiltCallback
 import com.example.hm_1.Utilities.Constants
 import com.example.hm_1.Utilities.SignalManager
+import com.example.hm_1.Utilities.TiltDetector
 import com.example.hm_1.logic.Game_Manager
 import com.example.hm_1.model.Data_Manager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -29,7 +31,10 @@ import kotlinx.coroutines.launch
 import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
-    lateinit var Distance_LBL : MaterialTextView
+    private lateinit var tiltDetector: TiltDetector
+    private var lastTilt: Int = 0
+    private var tiltMode: Boolean = false
+    lateinit var Distance_LBL: MaterialTextView
     lateinit var Main_Button_Left: ExtendedFloatingActionButton
     lateinit var Main_Button_Right: ExtendedFloatingActionButton
     lateinit var Cars: Array<AppCompatImageView>
@@ -49,14 +54,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val mode = intent.getStringExtra("MODE")
+        tiltMode = mode == "TILT_MODE" // True if "TILT_MODE", otherwise false
         findViews()
         gameManager = Game_Manager()
         gameManager.initializeGame()
         initViews()
         refreshLicensePanel()
-        initListeners()
+        if (tiltMode) {
+            initTiltMode()
+        } else {
+            initButtonMode()
+        }
         onResume()
     }
+
 
     override fun onPause() {
         super.onPause()
@@ -153,6 +165,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initTiltMode() {
+        Main_Button_Left.visibility = View.INVISIBLE
+        Main_Button_Right.visibility = View.INVISIBLE
+        initTiltDetector()
+        tiltDetector.start() // Start the tilt detector here
+    }
+
+    private fun initButtonMode() {
+        Main_Button_Left.visibility = View.VISIBLE
+        Main_Button_Right.visibility = View.VISIBLE
+        initListeners()
+    }
+
     private fun initListeners() {
         Main_Button_Left.setOnClickListener { view: View ->
             truckGoLeft()
@@ -172,6 +197,29 @@ class MainActivity : AppCompatActivity() {
         refreshTruckLoc()
     }
 
+    private fun initTiltDetector() {
+        tiltDetector = TiltDetector(
+            context = this,
+            tiltCallback = object : TiltCallback {
+                override fun tiltX() {
+                    Log.d("Tilt X", "value: ${tiltDetector.tiltCounterX.toString()}")
+                    tiltDetector.tiltCounterX.toString().also {
+                        if (tiltDetector.tiltCounterX > lastTilt) {
+                            truckGoRight()
+                            lastTilt = tiltDetector.tiltCounterX
+                        } else if (tiltDetector.tiltCounterX < lastTilt) {
+                            truckGoLeft()
+                            lastTilt = tiltDetector.tiltCounterX
+                        }
+                    }
+                }
+
+                override fun tiltY() {
+                    tiltDetector.tiltCounterY.toString()
+                }
+            }
+        )
+    }
 
     private fun findViews() {
         Distance_LBL = findViewById(R.id.main_LBL_distance)

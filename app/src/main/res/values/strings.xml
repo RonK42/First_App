@@ -3,4 +3,6 @@
     <string name="score_0">Score: 0</string>
     <string name="distance_0" />
     <string name="distance">Distance: 0</string>
+    <string name="moovment_buttons_LBL">Moovment Buttons</string>
+    <string name="moovment_tilt">Moovment By Tilt</string>
 </resources>
