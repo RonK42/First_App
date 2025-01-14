@@ -23,12 +23,12 @@ class Game_Manager {
         for (i in bowlingPinsMatrix.size - 1 downTo 0) {
             for (j in bowlingPinsMatrix[i].indices) {
                 if (bowlingPinsMatrix[i][j].isAppear) {
-                    bowlingPinsMatrix[i][j].isAppear = false
-                    bowlingPinsMatrix[i][j].isPin = false
                     if (i < bowlingPinsMatrix.size - 1) {
                         bowlingPinsMatrix[i + 1][j].isAppear = true
                         bowlingPinsMatrix[i + 1][j].isPin = bowlingPinsMatrix[i][j].isPin
                     }
+                    bowlingPinsMatrix[i][j].isAppear = false
+                    bowlingPinsMatrix[i][j].isPin = false
                 }
             }
         }
@@ -69,15 +69,21 @@ class Game_Manager {
         return false
     }
 
-    fun checkIncident(gameManager: Game_Manager): Boolean {
+    fun checkIncident(gameManager: Game_Manager): Int {
         val bowlingPinsMatrix = gameManager.bowlingPinsMatrix
         val trunkRow = gameManager.trunkRow
         for (i in trunkRow.indices) {
             if (trunkRow[i] && bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isAppear) {
-                if (bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isPin) removeLife()
-                return true
+                if (bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isPin) {
+                    removeLife()
+                    return 1
+                }
+            }
+            // Check if there is a coin
+            if (trunkRow[i] && bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isAppear && !bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isPin) {
+                return 2
             }
         }
-        return false
+        return 0
     }
 }

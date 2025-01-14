@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
     private var difficulty: String = "EASY"
     private var gameOn: Boolean = false
     private var distance: Int = 0
-
+    private var score: Int = 0
+    private lateinit var scoreLebel: MaterialTextView
     private lateinit var distanceLabel: MaterialTextView
     private lateinit var leftButton: ExtendedFloatingActionButton
     private lateinit var rightButton: ExtendedFloatingActionButton
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun findViews() {
+        scoreLebel = findViewById(R.id.main_LBL_score)
         distanceLabel = findViewById(R.id.main_LBL_distance)
         leftButton = findViewById(R.id.Main_Button_Left)
         rightButton = findViewById(R.id.Main_Button_Right)
@@ -164,9 +166,13 @@ class MainActivity : AppCompatActivity() {
                 distance += 10
                 gameManager.movePinsOrCoinsOneRowDown(gameManager.dataManager)
                 gameManager.randomAppearingPinOrCoin(gameManager.dataManager) // Add coins/pins dynamically
-                if (gameManager.checkIncident(gameManager)) {
+                if (gameManager.checkIncident(gameManager)==1) {
                     SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
-                    SignalManager(this@MainActivity).vibrate(500)
+                    SignalManager(this@MainActivity).vibrate(700)
+                }
+                if (gameManager.checkIncident(gameManager)==2){
+                    SignalManager(this@MainActivity).vibrate(200)
+                    addScore()
                 }
                 if (!gameManager.lifeRow[0]) {
                     gameOn = false
@@ -179,18 +185,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun addScore() {
+        score += 10
+        refreshScore()
+    }
     private fun stopGameLoop() {
         if (::gameJob.isInitialized && gameJob.isActive) gameJob.cancel()
         gameOn = false
     }
 
     private fun refreshUI() {
+        refreshScore()
         refreshDistance()
         refreshTruckLocation()
         refreshPinsLocation()
         refreshLicensePanel()
     }
 
+    private fun refreshScore() {
+        scoreLebel.text = "Score: $score"
+    }
     private fun refreshDistance() {
         distanceLabel.text = "Distance: $distance"
     }

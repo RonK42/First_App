@@ -42,7 +42,7 @@ class SignalManager(context: Context) {
                 .makeText(
                     context,
                     text,
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 )
                 .show()
         }
