@@ -1,11 +1,14 @@
 package com.example.hm_1.model
 
+data class Cell(
+    var isAppear: Boolean,
+    var isPin : Boolean
+)
+
 class Data_Manager {
 
-    //Matrix to store the default state of the pins+trunk
-
-    private val bowlingPinsMatrix: Array<Array<Boolean>> =
-        Array(4) { Array(5) { false } }
+    private val bowlingPinsMatrix: Array<Array<Cell>> =
+        Array(4) { Array(5) { Cell(false, false) } }
 
     private val trunkRow: Array<Boolean> =
         Array(5) { false }
@@ -16,11 +19,11 @@ class Data_Manager {
     fun getLifeRow(): Array<Boolean> {
         return lifeRow
     }
-    fun getBowlingPinsMatrix(): Array<Array<Boolean>> {
+
+    fun getBowlingPinsMatrix(): Array<Array<Cell>> {
         return bowlingPinsMatrix
     }
 
-    // Method to get the trunk matrix
     fun getTrunkRow(): Array<Boolean> {
         return trunkRow
     }

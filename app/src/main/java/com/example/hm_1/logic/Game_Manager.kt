@@ -1,9 +1,6 @@
 package com.example.hm_1.logic
 
-import android.util.Log
-import android.view.View
 import com.example.hm_1.model.Data_Manager
-
 
 class Game_Manager {
 
@@ -13,39 +10,41 @@ class Game_Manager {
     val lifeRow = dataManager.getLifeRow()
 
     fun initializeGame() {
-        // Set the default state of the pins
-        bowlingPinsMatrix[0][0] = true
+        bowlingPinsMatrix[0][1].isAppear = true
+        bowlingPinsMatrix[0][1].isPin = true
+        bowlingPinsMatrix[0][3].isAppear = true
+        bowlingPinsMatrix[0][3].isPin = false // This is a coin
 
-        // Set the default state of the trunk
         trunkRow[2] = true
-
     }
 
-    fun movePinsOneRowDown(dataManager: Data_Manager) {
+    fun movePinsOrCoinsOneRowDown(dataManager: Data_Manager) {
         val bowlingPinsMatrix = dataManager.getBowlingPinsMatrix()
-
-        for (i in bowlingPinsMatrix.size - 1 downTo 1) {
+        for (i in bowlingPinsMatrix.size - 1 downTo 0) {
             for (j in bowlingPinsMatrix[i].indices) {
-                bowlingPinsMatrix[i][j] = bowlingPinsMatrix[i - 1][j]
+                if (bowlingPinsMatrix[i][j].isAppear) {
+                    bowlingPinsMatrix[i][j].isAppear = false
+                    bowlingPinsMatrix[i][j].isPin = false
+                    if (i < bowlingPinsMatrix.size - 1) {
+                        bowlingPinsMatrix[i + 1][j].isAppear = true
+                        bowlingPinsMatrix[i + 1][j].isPin = bowlingPinsMatrix[i][j].isPin
+                    }
+                }
             }
         }
-        for (j in bowlingPinsMatrix[0].indices) {
-            bowlingPinsMatrix[0][j] = false
-        }
     }
 
-    fun randomAppearingPin(dataManager: Data_Manager) {
-
+    fun randomAppearingPinOrCoin(dataManager: Data_Manager) {
         val bowlingPinsMatrix = dataManager.getBowlingPinsMatrix()
-        val randomChance = (0..100).random()//Korean Random
+        val randomChance = (0..100).random()
         if (randomChance < 60) {
             val randomIndex = (0..4).random()
-            bowlingPinsMatrix[0][randomIndex] = true
+            bowlingPinsMatrix[0][randomIndex].isAppear = true
+            bowlingPinsMatrix[0][randomIndex].isPin = randomChance < 30 // 50% chance for a pin
         }
     }
 
-
-    public fun moveTrunkLeftOrRight(dataManager: Data_Manager, direction: String) {
+    fun moveTrunkLeftOrRight(dataManager: Data_Manager, direction: String) {
         for ((index, value) in trunkRow.withIndex()) {
             if (value && direction == "right" && index > 0) {
                 trunkRow[index] = false
@@ -58,12 +57,9 @@ class Game_Manager {
                 break
             }
         }
-
-
     }
 
-    fun removeLife(): Boolean {
-        val lifeRow = dataManager.getLifeRow()
+    private fun removeLife(): Boolean {
         for (i in lifeRow.size - 1 downTo 0) {
             if (lifeRow[i]) {
                 lifeRow[i] = false
@@ -73,32 +69,15 @@ class Game_Manager {
         return false
     }
 
-    fun howManyHeartLeft(dataManager: Data_Manager): Int {
-        var count = 0
-        val lifeRow = dataManager.getLifeRow()
-        for (i in lifeRow.indices) {
-            if (lifeRow[i]) {
-                count++
-            }
-        }
-        return count
-    }
-
     fun checkIncident(gameManager: Game_Manager): Boolean {
         val bowlingPinsMatrix = gameManager.bowlingPinsMatrix
         val trunkRow = gameManager.trunkRow
         for (i in trunkRow.indices) {
-            if (trunkRow[i] && bowlingPinsMatrix[3][i]) {
-                removeLife()
+            if (trunkRow[i] && bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isAppear) {
+                if (bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isPin) removeLife()
                 return true
             }
         }
         return false
     }
-
 }
-
-
-
-
-

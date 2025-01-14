@@ -3,7 +3,9 @@ package com.example.hm_1
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.hm_1.Interface.TiltCallback
@@ -35,6 +37,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cars: Array<View>
     private lateinit var pins: Array<Array<View>>
     private lateinit var licenseRow: Array<View>
+
+    private val coinIcon: Int = R.drawable.goldbitcoin
+    private val pinIcon: Int = R.drawable.bowling_pin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,16 +86,25 @@ class MainActivity : AppCompatActivity() {
 
         pins = arrayOf(
             arrayOf(
-                findViewById(R.id.One_one), findViewById(R.id.One_two), findViewById(R.id.One_three),
-                findViewById(R.id.One_Four), findViewById(R.id.One_Five)
+                findViewById(R.id.One_one),
+                findViewById(R.id.One_two),
+                findViewById(R.id.One_three),
+                findViewById(R.id.One_Four),
+                findViewById(R.id.One_Five)
             ),
             arrayOf(
-                findViewById(R.id.Two_One), findViewById(R.id.Two_Two), findViewById(R.id.Two_Three),
-                findViewById(R.id.Two_Four), findViewById(R.id.Two_Five)
+                findViewById(R.id.Two_One),
+                findViewById(R.id.Two_Two),
+                findViewById(R.id.Two_Three),
+                findViewById(R.id.Two_Four),
+                findViewById(R.id.Two_Five)
             ),
             arrayOf(
-                findViewById(R.id.Three_One), findViewById(R.id.Three_Two), findViewById(R.id.Three_Three),
-                findViewById(R.id.Three_Four), findViewById(R.id.Three_Five)
+                findViewById(R.id.Three_One),
+                findViewById(R.id.Three_Two),
+                findViewById(R.id.Three_Three),
+                findViewById(R.id.Three_Four),
+                findViewById(R.id.Three_Five)
             )
         )
 
@@ -148,19 +162,16 @@ class MainActivity : AppCompatActivity() {
         gameJob = lifecycleScope.launch {
             while (gameOn) {
                 distance += 10
-                gameManager.movePinsOneRowDown(gameManager.dataManager)
-                gameManager.randomAppearingPin(gameManager.dataManager)
-
+                gameManager.movePinsOrCoinsOneRowDown(gameManager.dataManager)
+                gameManager.randomAppearingPinOrCoin(gameManager.dataManager) // Add coins/pins dynamically
                 if (gameManager.checkIncident(gameManager)) {
                     SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
                     SignalManager(this@MainActivity).vibrate(500)
                 }
-
                 if (!gameManager.lifeRow[0]) {
                     gameOn = false
                     break
                 }
-
                 refreshUI()
                 delay(gameDelay)
             }
@@ -195,7 +206,17 @@ class MainActivity : AppCompatActivity() {
         val pinMatrix = gameManager.bowlingPinsMatrix
         pins.forEachIndexed { rowIndex, pinRow ->
             pinRow.forEachIndexed { pinIndex, pin ->
-                pin.visibility = if (pinMatrix[rowIndex][pinIndex]) View.VISIBLE else View.INVISIBLE
+                val pinData = pinMatrix[rowIndex][pinIndex]
+                if (pinData.isAppear) {
+                    pin.visibility = View.VISIBLE
+                    if (!pinData.isPin) {
+                        (pin as? ImageView)?.setImageResource(coinIcon) // Cast pin to ImageView
+                    } else {
+                        (pin as? ImageView)?.setImageResource(pinIcon) // Cast pin to ImageView
+                    }
+                } else {
+                    pin.visibility = View.INVISIBLE
+                }
             }
         }
     }
