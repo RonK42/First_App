@@ -3,7 +3,6 @@ package com.example.hm_1
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gameJob: Job
 
     private var tiltMode: Boolean = false
+    private var difficulty: String = "EASY"
     private var gameOn: Boolean = false
     private var distance: Int = 0
 
@@ -40,9 +40,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Determine game mode
+        // Determine game mode and difficulty
         val mode = intent.getStringExtra("MODE")
         tiltMode = mode == "TILT_MODE"
+        difficulty = intent.getStringExtra("DIFFICULTY") ?: "EASY"
 
         // Initialize views and game manager
         findViews()
@@ -120,12 +121,12 @@ class MainActivity : AppCompatActivity() {
     private fun initButtonMode() {
         leftButton.visibility = View.VISIBLE
         rightButton.visibility = View.VISIBLE
-        leftButton.setOnClickListener { moveTruckLeft() }
-        rightButton.setOnClickListener { moveTruckRight() }
+        leftButton.setOnClickListener { moveTruckRight() }
+        rightButton.setOnClickListener { moveTruckLeft() }
     }
 
     private fun handleTilt(currentTilt: Int) {
-        if (currentTilt > 0) moveTruckRight() else moveTruckLeft()
+        if (currentTilt > 0) moveTruckLeft() else moveTruckRight()
     }
 
     private fun moveTruckLeft() {
@@ -142,6 +143,8 @@ class MainActivity : AppCompatActivity() {
         if (gameOn) return
 
         gameOn = true
+        val gameDelay = if (difficulty == "EASY") Constants.Game.DELAY else Constants.Game.DELAY / 2
+
         gameJob = lifecycleScope.launch {
             while (gameOn) {
                 distance += 10
@@ -159,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 refreshUI()
-                delay(Constants.Game.DELAY)
+                delay(gameDelay)
             }
             endGame()
         }

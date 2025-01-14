@@ -6,61 +6,69 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupModes"
-        android:layout_marginStart="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="150dp"
         app:singleSelection="true"
-        app:selectionRequired="true"
-        app:chipSpacingVertical="16dp"
-        > <!-- Set orientation to vertical -->
+        app:selectionRequired="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTilt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tilt Mode"
-            android:checkable="true"
-            android:backgroundTint="@color/neon_purple_blue"
-            android:focusable="true" />
+            app:checkedIconEnabled="@color/neon_light_blue"
+            app:checkedIconTint="@color/neon_light_blue"
+            android:checkable="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipArrows"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Arrows Mode"
-            android:backgroundTint="@color/neon_purple_blue"
-            android:checkable="true"
-            android:focusable="true" />
+            app:checkedIconEnabled="@color/neon_light_blue"
+            app:checkedIconTint="@color/neon_light_blue"
+            android:checkable="true" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupDifficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/chipGroupModes"
+        android:layout_marginTop="20dp"
+        app:singleSelection="true"
+        app:selectionRequired="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipEasy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconTint="@color/neon_light_blue"
+            app:checkedIconEnabled="@color/neon_light_blue"
+            android:text="Easy"
+            android:checkable="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipHard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard"
+            app:checkedIconEnabled="@color/neon_light_blue"
+            app:checkedIconTint="@color/neon_light_blue"
+            android:checkable="true" />
     </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/Main_Button_Left"
-        android:layout_width="@dimen/Default_Button_Width"
-        android:layout_height="@dimen/Default_Button_Height"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/Default_Element_Margin"
-        android:layout_marginBottom="@dimen/Default_Element_Margin"
+        android:id="@+id/btnStartGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/chipGroupDifficulty"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/buttons_color"
-        android:text="Start Easy"
-        android:textStyle="bold"
-        android:textSize="24sp" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/Start_Hard_BTN"
-        android:layout_width="@dimen/Default_Button_Width"
-        android:layout_height="@dimen/Default_Button_Height"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="@dimen/Default_Element_Margin"
-        android:layout_marginBottom="@dimen/Default_Element_Margin"
-        android:backgroundTint="@color/buttons_color"
-        android:text="Start Hard"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        app:iconGravity="end" />
-
+        android:text="Start Game" />
 
 </RelativeLayout>
