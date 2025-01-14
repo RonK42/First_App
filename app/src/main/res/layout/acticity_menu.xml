@@ -1,26 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_menu">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/Buttons_Button"
-        android:backgroundTint="@color/neon_light_blue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:layout_width="160dp"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupModes"
+        android:layout_marginStart="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/moovment_buttons_LBL" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:chipSpacingVertical="16dp"
+        > <!-- Set orientation to vertical -->
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipTilt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tilt Mode"
+            android:checkable="true"
+            android:backgroundTint="@color/neon_purple_blue"
+            android:focusable="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipArrows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrows Mode"
+            android:backgroundTint="@color/neon_purple_blue"
+            android:checkable="true"
+            android:focusable="true" />
+    </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/Tilt_Button"
-        android:backgroundTint="@color/neon_light_blue"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/Buttons_Button"
-        android:layout_marginTop="20dp"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:text="@string/moovment_tilt" />
+        android:id="@+id/Main_Button_Left"
+        android:layout_width="@dimen/Default_Button_Width"
+        android:layout_height="@dimen/Default_Button_Height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/Default_Element_Margin"
+        android:layout_marginBottom="@dimen/Default_Element_Margin"
+        android:backgroundTint="@color/buttons_color"
+        android:text="Start Easy"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/Start_Hard_BTN"
+        android:layout_width="@dimen/Default_Button_Width"
+        android:layout_height="@dimen/Default_Button_Height"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/Default_Element_Margin"
+        android:layout_marginBottom="@dimen/Default_Element_Margin"
+        android:backgroundTint="@color/buttons_color"
+        android:text="Start Hard"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:iconGravity="end" />
+
+
 </RelativeLayout>

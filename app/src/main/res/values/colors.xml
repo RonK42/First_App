@@ -5,5 +5,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="buttons_color">#FFEB3B</color>
     <color name="neon_light_blue">#06F8E4</color>
+    <color name="neon_purple_blue">#9840F6</color>
     <color name="car">#FF0000</color>
 </resources>
