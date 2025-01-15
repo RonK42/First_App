@@ -7,4 +7,6 @@
     <color name="neon_light_blue">#06F8E4</color>
     <color name="neon_purple_blue">#9840F6</color>
     <color name="car">#FF0000</color>
+    <color name="table_background">#80000000</color>
+
 </resources>
