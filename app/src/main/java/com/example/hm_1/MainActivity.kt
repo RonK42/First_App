@@ -18,6 +18,7 @@ import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.example.hm_1.GameOverActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,12 +47,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Determine game mode and difficulty
+
         val mode = intent.getStringExtra("MODE")
         tiltMode = mode == "TILT_MODE"
         difficulty = intent.getStringExtra("DIFFICULTY") ?: "EASY"
 
-        // Initialize views and game manager
+
         findViews()
         gameManager = Game_Manager().apply { initializeGame() }
 
@@ -165,7 +166,7 @@ class MainActivity : AppCompatActivity() {
             while (gameOn) {
                 distance += 10
                 gameManager.movePinsOrCoinsOneRowDown(gameManager.dataManager)
-                gameManager.randomAppearingPinOrCoin(gameManager.dataManager) // Add coins/pins dynamically
+                gameManager.randomAppearingPinOrCoin(gameManager.dataManager)
                 if (gameManager.checkIncident(gameManager)==1) {
                     SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
                     SignalManager(this@MainActivity).vibrate(700)
@@ -224,9 +225,9 @@ class MainActivity : AppCompatActivity() {
                 if (pinData.isAppear) {
                     pin.visibility = View.VISIBLE
                     if (!pinData.isPin) {
-                        (pin as? ImageView)?.setImageResource(coinIcon) // Cast pin to ImageView
+                        (pin as? ImageView)?.setImageResource(coinIcon)
                     } else {
-                        (pin as? ImageView)?.setImageResource(pinIcon) // Cast pin to ImageView
+                        (pin as? ImageView)?.setImageResource(pinIcon)
                     }
                 } else {
                     pin.visibility = View.INVISIBLE
@@ -257,10 +258,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun endGame() {
+        Log.d("MainActivity", "Sending score to GameOverActivity: $score")
         SignalManager(this).toast("GAME OVER!!!!!")
         SignalManager(this).vibrate(1500)
-        val intent = Intent(this, gameOverActivity::class.java)
+
+        val intent = Intent(this, GameOverActivity::class.java)
+        intent.putExtra("score", score)
         startActivity(intent)
         finish()
     }
+
+
+
 }
