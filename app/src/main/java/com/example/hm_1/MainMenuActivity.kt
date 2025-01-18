@@ -5,6 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import android.location.Location
+import android.location.LocationManager
+import androidx.core.app.ActivityCompat
+import android.content.pm.PackageManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class MainMenuActivity : AppCompatActivity() {
 
@@ -17,6 +23,12 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(R.layout.acticity_menu)
         findViews()
         initViews()
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            1001
+        )
+
     }
 
     private fun findViews() {
