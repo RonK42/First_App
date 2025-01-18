@@ -9,6 +9,16 @@
     android:gravity="center_horizontal"
     tools:context=".fragments.HighScoreFragment">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Start_Over_BTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Over"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/neon_light_blue" />
+
     <TextView
         android:id="@+id/score_title"
         android:layout_width="wrap_content"

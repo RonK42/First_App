@@ -14,11 +14,13 @@ import androidx.fragment.app.Fragment
 import com.example.hm_1.Interface.HighScoreCallBack
 import com.example.hm_1.logic.Player
 import com.example.hm_1.R
+import com.google.android.material.button.MaterialButton
 
 class HighScoreFragment : Fragment() {
 
     private lateinit var highScoreTable: TableLayout
     var onLocationClicked: HighScoreCallBack? = null
+    var restartGame : HighScoreCallBack? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,11 @@ class HighScoreFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_score, container, false)
         findViews(v)
+
+        val startOverBtn = v.findViewById<MaterialButton>(R.id.Start_Over_BTN)
+        startOverBtn.setOnClickListener {
+            restartGame?.restartGame() // Trigger the restartGame callback
+        }
 
         val players = arguments?.getParcelableArrayList<Player>("players") ?: arrayListOf()
         displayScores(players)

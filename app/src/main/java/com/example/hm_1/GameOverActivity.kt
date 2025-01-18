@@ -1,5 +1,6 @@
 package com.example.hm_1
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
@@ -11,13 +12,11 @@ import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import android.os.Parcel
-import android.os.Parcelable
 import com.example.hm_1.fragments.FragmentMap
 import com.example.hm_1.logic.Player
-import com.google.android.gms.maps.GoogleMap
 
-class GameOverActivity : AppCompatActivity() {
+class GameOverActivity : AppCompatActivity(), HighScoreCallBack {
+
     private val players = mutableListOf<Player>()
     private lateinit var main_FRAME_list: FrameLayout
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -55,25 +54,8 @@ class GameOverActivity : AppCompatActivity() {
             bundle.putParcelableArrayList("players", ArrayList(players))
             highScoreFragment.arguments = bundle
 
-            highScoreFragment.onLocationClicked = object : HighScoreCallBack {
-                override fun onLocationClicked(playerName: String) {
-                    val player = players.find { it.name == playerName }
-                    if (player != null) {
-                        val locationParts = player.location.split(",")
-                        if (locationParts.size == 2) {
-                            val latitude = locationParts[0].toDouble()
-                            val longitude = locationParts[1].toDouble()
-
-                            val fragmentMap = FragmentMap.newInstance(latitude, longitude)
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.main_FRAME_map, fragmentMap)
-                                .commit()
-                        } else {
-                            Log.e("GameOverActivity", "Invalid location format: ${player.location}")
-                        }
-                    }
-                }
-            }
+            highScoreFragment.onLocationClicked = this
+            highScoreFragment.restartGame = this // Set restart callback
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_FRAME_list, highScoreFragment)
@@ -145,5 +127,29 @@ class GameOverActivity : AppCompatActivity() {
                 }
             }.filterNotNull())
         }
+    }
+
+    override fun onLocationClicked(playerName: String) {
+        val player = players.find { it.name == playerName }
+        if (player != null) {
+            val locationParts = player.location.split(",")
+            if (locationParts.size == 2) {
+                val latitude = locationParts[0].toDouble()
+                val longitude = locationParts[1].toDouble()
+
+                val fragmentMap = FragmentMap.newInstance(latitude, longitude)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_FRAME_map, fragmentMap)
+                    .commit()
+            } else {
+                Log.e("GameOverActivity", "Invalid location format: ${player.location}")
+            }
+        }
+    }
+
+    override fun restartGame() {
+        val intent = Intent(this, MainMenuActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

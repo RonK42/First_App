@@ -167,24 +167,28 @@ class MainActivity : AppCompatActivity() {
                 distance += 10
                 gameManager.movePinsOrCoinsOneRowDown(gameManager.dataManager)
                 gameManager.randomAppearingPinOrCoin(gameManager.dataManager)
-                if (gameManager.checkIncident(gameManager)==1) {
+                val incidentType = gameManager.checkIncident(gameManager)
+
+                if (incidentType == 1) { // Pin collision
                     SignalManager(this@MainActivity).toast("BE MORE CAREFUL!!!")
                     SignalManager(this@MainActivity).vibrate(700)
-                }
-                if (gameManager.checkIncident(gameManager)==2){
+                } else if (incidentType == 2) { // Coin collision
                     SignalManager(this@MainActivity).vibrate(200)
                     addScore()
                 }
-                if (!gameManager.lifeRow[0]) {
+
+                if (!gameManager.lifeRow[0]) { // No more lives
                     gameOn = false
                     break
                 }
+
                 refreshUI()
                 delay(gameDelay)
             }
             endGame()
         }
     }
+
 
     private fun addScore() {
         score += 10

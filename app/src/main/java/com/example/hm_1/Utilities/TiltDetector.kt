@@ -41,23 +41,29 @@ class TiltDetector(context: Context, private val tiltCallback: TiltCallback?) {
     }
 
     private fun calculateTilt(x: Float, y: Float) {
-        val stillThreshold = 0.5f
+        val stillThreshold = 2f
 
-        if (System.currentTimeMillis() - timestamp >= 1) {
+        if (System.currentTimeMillis() - timestamp >= 50) {
             timestamp = System.currentTimeMillis()
 
             if (abs(x) > stillThreshold) {
-                if (x > 1.0) {
+                if (x > 1.5) {
                     tiltCounterX--
                     tiltCallback?.tiltX()
-                } else if (x < -1.0) {
+                } else if (x < -1.5) {
                     tiltCounterX++
                     tiltCallback?.tiltX()
                 }
             }
-            if (abs(y) >= 3.0) {
-                tiltCounterY++
-                tiltCallback?.tiltY()
+
+            if (abs(y) > stillThreshold) {
+                if (y > 1.5) {
+                    tiltCounterY++
+                    tiltCallback?.tiltY()
+                } else if (y < -1.5) {
+                    tiltCounterY--
+                    tiltCallback?.tiltY()
+                }
             }
         }
     }

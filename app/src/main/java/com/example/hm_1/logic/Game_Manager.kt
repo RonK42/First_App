@@ -75,15 +75,17 @@ class Game_Manager {
         for (i in trunkRow.indices) {
             if (trunkRow[i] && bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isAppear) {
                 if (bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isPin) {
-                    removeLife()
-                    return 1
+                    // Remove life only once per collision
+                    if (removeLife()) {
+                        return 1
+                    }
+                } else {
+                    // Handle coin collision
+                    return 2
                 }
-            }
-            // Check if there is a coin
-            if (trunkRow[i] && bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isAppear && !bowlingPinsMatrix[bowlingPinsMatrix.size - 1][i].isPin) {
-                return 2
             }
         }
         return 0
     }
+
 }
