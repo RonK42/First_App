@@ -12,7 +12,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.hm_1.Interface.HighScoreCallBack
-import com.example.hm_1.Player
+import com.example.hm_1.logic.Player
 import com.example.hm_1.R
 
 class HighScoreFragment : Fragment() {

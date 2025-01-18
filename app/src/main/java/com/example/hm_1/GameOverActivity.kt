@@ -13,41 +13,11 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import android.os.Parcel
 import android.os.Parcelable
-
-data class Player(
-    val name: String,
-    val score: Int,
-    val location: String
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readInt(),
-        parcel.readString() ?: ""
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeInt(score)
-        parcel.writeString(location)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Player> {
-        override fun createFromParcel(parcel: Parcel): Player {
-            return Player(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Player?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+import com.example.hm_1.fragments.FragmentMap
+import com.example.hm_1.logic.Player
+import com.google.android.gms.maps.GoogleMap
 
 class GameOverActivity : AppCompatActivity() {
-
     private val players = mutableListOf<Player>()
     private lateinit var main_FRAME_list: FrameLayout
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -79,6 +49,7 @@ class GameOverActivity : AppCompatActivity() {
 
             savePlayers()
 
+            // Load HighScoreFragment
             val highScoreFragment = HighScoreFragment()
             val bundle = Bundle()
             bundle.putParcelableArrayList("players", ArrayList(players))
@@ -88,15 +59,30 @@ class GameOverActivity : AppCompatActivity() {
                 override fun onLocationClicked(playerName: String) {
                     val player = players.find { it.name == playerName }
                     if (player != null) {
-                        Log.d("GameOverActivity", "Player Name: $playerName, GPS Location: ${player.location}")
-                    } else {
-                        Log.d("GameOverActivity", "Player $playerName not found")
+                        val locationParts = player.location.split(",")
+                        if (locationParts.size == 2) {
+                            val latitude = locationParts[0].toDouble()
+                            val longitude = locationParts[1].toDouble()
+
+                            val fragmentMap = FragmentMap.newInstance(latitude, longitude)
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.main_FRAME_map, fragmentMap)
+                                .commit()
+                        } else {
+                            Log.e("GameOverActivity", "Invalid location format: ${player.location}")
+                        }
                     }
                 }
             }
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_FRAME_list, highScoreFragment)
+                .commit()
+
+            // Load FragmentMap with current location as default
+            val fragmentMap = FragmentMap.newInstance(latitude, longitude)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_FRAME_map, fragmentMap)
                 .commit()
         }
     }
