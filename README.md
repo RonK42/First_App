@@ -23,7 +23,7 @@ Known as the best developer that ever lived.
 
 
 ## Demo
-https://www.youtube.com/shorts/XCmCUcnb6xo
+[https://www.youtube.com/shorts/XCmCUcnb6xo](https://youtube.com/shorts/Q2RMh-mbuJQ)
 
 ## Screenshots
 
