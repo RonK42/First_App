@@ -48,20 +48,20 @@ class GameOverActivity : AppCompatActivity(), HighScoreCallBack {
 
             savePlayers()
 
-            // Load HighScoreFragment
+
             val highScoreFragment = HighScoreFragment()
             val bundle = Bundle()
             bundle.putParcelableArrayList("players", ArrayList(players))
             highScoreFragment.arguments = bundle
 
             highScoreFragment.onLocationClicked = this
-            highScoreFragment.restartGame = this // Set restart callback
+            highScoreFragment.restartGame = this
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_FRAME_list, highScoreFragment)
                 .commit()
 
-            // Load FragmentMap with current location as default
+
             val fragmentMap = FragmentMap.newInstance(latitude, longitude)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_FRAME_map, fragmentMap)
@@ -90,7 +90,7 @@ class GameOverActivity : AppCompatActivity(), HighScoreCallBack {
             location?.let {
                 callback(it.latitude, it.longitude)
             } ?: run {
-                callback(0.0, 0.0) // Default location if unavailable
+                callback(0.0, 0.0)
             }
         }
     }

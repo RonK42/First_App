@@ -31,7 +31,7 @@ class HighScoreFragment : Fragment() {
 
         val startOverBtn = v.findViewById<MaterialButton>(R.id.Start_Over_BTN)
         startOverBtn.setOnClickListener {
-            restartGame?.restartGame() // Trigger the restartGame callback
+            restartGame?.restartGame()
         }
 
         val players = arguments?.getParcelableArrayList<Player>("players") ?: arrayListOf()
@@ -45,7 +45,6 @@ class HighScoreFragment : Fragment() {
     }
 
     private fun displayScores(players: List<Player>) {
-        // ניקוי הטבלה הקיימת
         highScoreTable.removeViews(1, highScoreTable.childCount - 1)
 
         for ((index, player) in players.withIndex()) {
@@ -79,7 +78,6 @@ class HighScoreFragment : Fragment() {
                 setImageResource(R.drawable.ic_map_pin)
                 setBackgroundColor(Color.TRANSPARENT)
                 setOnClickListener {
-                    // שולח קריאה חזרה עם שם השחקן
                     onLocationClicked?.onLocationClicked(player.name)
                 }
             }
@@ -89,7 +87,6 @@ class HighScoreFragment : Fragment() {
             row.addView(scoreView)
             row.addView(locationButton)
 
-            // הוספת השורה לטבלה
             highScoreTable.addView(row)
         }
     }

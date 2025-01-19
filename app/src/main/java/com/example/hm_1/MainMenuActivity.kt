@@ -57,7 +57,7 @@ class MainMenuActivity : AppCompatActivity() {
             if (mode != null && difficulty != null) {
                 moveToGameActivity(mode, difficulty)
             } else {
-                // Handle missing selections (e.g., show a toast)
+                // Show error message
             }
         }
     }
